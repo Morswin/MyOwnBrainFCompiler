@@ -21,7 +21,7 @@ class Main:
     _acceptable_chars: str = "<>[]-+,."
     _char_array: List[int] = []
     _char_array_max_length: int = 30_000
-    _char_array_pointer: int = 0
+    _pointer: int = 0
     _code_in: List[str] = []                 # For storing input
     _code_out: List[str] = []                # For storing the result
 
@@ -36,30 +36,33 @@ class Main:
         while True:
             raise NotImplementedError("Work in progress...")
 
-    # some placeholders here
-    def _1(self):
-        pass  # >
+    def pointer_move_right(self):
+        """Functionality for '>' instruction."""
+        self.pointer = self.pointer + 1
 
-    def _2(self):
-        pass  # <
+    def pointer_more_left(self):
+        """Functionality for '<' instruction."""
+        self.pointer = self.pointer - 1
 
-    def _3(self):
-        pass  # +
+    def value_increase(self):
+        """Functionality for '+' instruction."""
+        self.char_array[self.pointer] = self.char_array[self.pointer] + 1
 
-    def _4(self):
-        pass  # -
+    def value_decrease(self):
+        """Functionality for '-' instruction."""
+        self.char_array[self.pointer] = self.char_array[self.pointer] - 1
 
     def _5(self):
-        pass  # .
+        """Functionality for '.' instruction."""
 
     def _6(self):
-        pass  # ,
+        """Functionality for ',' instruction."""
 
     def _7(self):
-        pass  # [
+        """Functionality for '[' instruction."""
 
     def _8(self):
-        pass  # ]
+        """Functionality for ']' instruction."""
 
     def get_input(self) -> None:
         self.code_in = [_ for _ in input().strip()]
@@ -130,6 +133,23 @@ class Main:
             )
         else:
             self._code_in = code
+
+    @property
+    def pointer(self) -> int:
+        return self._pointer
+
+    @pointer.setter
+    def pointer(self, val: int) -> None:
+        if not isinstance(val, int):
+            raise TypeError(
+                "Pointer must be an integer."
+            )
+        elif val < 0:
+            self._pointer = 0
+        elif val > self.char_array_max_length:
+            self._pointer = self.char_array_max_length
+        else:
+            self._pointer = val
 
 
 if __name__ == "__main__":
