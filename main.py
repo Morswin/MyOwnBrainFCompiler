@@ -19,11 +19,11 @@ class Main:
         in here.
     """
     _acceptable_chars: str = "<>[]-+,."
-    _char_array: List[str] = []
+    _char_array: List[int] = []
     _char_array_max_length: int = 30_000
     _char_array_pointer: int = 0
     _code_in: List[str] = []                 # For storing input
-    _code_out: str = ""                      # For storing the result
+    _code_out: List[str] = []                # For storing the result
 
     def __init__(self, max_length: int = 30_000) -> None:
         self.char_array_max_length = max_length
@@ -31,7 +31,10 @@ class Main:
 
     def __call__(self, *args, **kwargs) -> None:
         print("It kind of works")
-        raise NotImplementedError("Work in progress...")
+        # The main loop of the program, that should run in case of using the program
+        #   in a CLI way
+        while True:
+            raise NotImplementedError("Work in progress...")
 
     # some placeholders here
     def _1(self):
@@ -66,22 +69,18 @@ class Main:
         return self._acceptable_chars
 
     @property
-    def char_array(self) -> List[str]:
+    def char_array(self) -> List[int]:
         return self._char_array
 
     @char_array.setter
-    def char_array(self, char_array: List[str]) -> None:
+    def char_array(self, char_array: List[int]) -> None:
         if not isinstance(char_array, list):
             raise TypeError(
                 "Char array must be a list."
             )
-        elif not all([isinstance(_, str) for _ in char_array]):
+        elif not all([isinstance(_, int) for _ in char_array]):
             raise TypeError(
-                "In char array, all values must be a string."
-            )
-        elif not all([len(_) == 1 for _ in char_array]):
-            raise ValueError(
-                "In char array, all strings must be of 1 length."
+                "In char array, all values must be an integer."
             )
         elif len(char_array) != self.char_array_max_length:
             raise ValueError(
